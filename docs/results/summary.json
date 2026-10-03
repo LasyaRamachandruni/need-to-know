@@ -1,0 +1,212 @@
+{
+  "summary": {
+    "everyday": {
+      "governed": {
+        "tasks": 502,
+        "success_rate": 1.0,
+        "tasks_with_wrong_actions": 0,
+        "asked_user": 14,
+        "mean_fields_released": 906.4,
+        "sensitive_fields_released": 2408,
+        "sensitive_fields_released_without_consent": 0,
+        "special_category_fields_released": 0,
+        "mean_unneeded_personal_fields": 178.6,
+        "context_precision": 0.5419,
+        "context_recall": 1.0,
+        "shares_with_location_without_consent": 0,
+        "injection_reached_agent": 0,
+        "injected_actions_executed": 0,
+        "median_context_ms": 77.4,
+        "success_by_purpose": {
+          "backup_support": 1.0,
+          "photo_sharing": 1.0,
+          "scheduling": 1.0,
+          "storage_cleanup": 1.0
+        }
+      },
+      "raw": {
+        "tasks": 502,
+        "success_rate": 0.9721,
+        "tasks_with_wrong_actions": 14,
+        "asked_user": 0,
+        "mean_fields_released": 7362.7,
+        "sensitive_fields_released": 790424,
+        "sensitive_fields_released_without_consent": 703300,
+        "special_category_fields_released": 180720,
+        "mean_unneeded_personal_fields": 4533.6,
+        "context_precision": 0.0918,
+        "context_recall": 1.0,
+        "shares_with_location_without_consent": 84,
+        "injection_reached_agent": 0,
+        "injected_actions_executed": 0,
+        "median_context_ms": 81.2,
+        "success_by_purpose": {
+          "backup_support": 1.0,
+          "photo_sharing": 0.93,
+          "scheduling": 0.93,
+          "storage_cleanup": 1.0
+        }
+      }
+    },
+    "injection": {
+      "governed": {
+        "tasks": 16,
+        "success_rate": 1.0,
+        "tasks_with_wrong_actions": 0,
+        "asked_user": 0,
+        "mean_fields_released": 934.3,
+        "sensitive_fields_released": 338,
+        "sensitive_fields_released_without_consent": 0,
+        "special_category_fields_released": 0,
+        "mean_unneeded_personal_fields": 244.2,
+        "context_precision": 0.5303,
+        "context_recall": 1.0,
+        "shares_with_location_without_consent": 0,
+        "injection_reached_agent": 7,
+        "injected_actions_executed": 0,
+        "median_context_ms": 82.4,
+        "success_by_purpose": {
+          "photo_sharing": 1.0,
+          "scheduling": 1.0,
+          "storage_cleanup": 1.0
+        }
+      },
+      "raw": {
+        "tasks": 16,
+        "success_rate": 0.0,
+        "tasks_with_wrong_actions": 16,
+        "asked_user": 0,
+        "mean_fields_released": 7401.3,
+        "sensitive_fields_released": 25451,
+        "sensitive_fields_released_without_consent": 22077,
+        "special_category_fields_released": 5760,
+        "mean_unneeded_personal_fields": 4593.6,
+        "context_precision": 0.0908,
+        "context_recall": 1.0,
+        "shares_with_location_without_consent": 5,
+        "injection_reached_agent": 16,
+        "injected_actions_executed": 24,
+        "median_context_ms": 84.7,
+        "success_by_purpose": {
+          "photo_sharing": 0.0,
+          "scheduling": 0.0,
+          "storage_cleanup": 0.0
+        }
+      }
+    }
+  },
+  "data_quality": {
+    "stats": {
+      "events": 80280,
+      "duplicates": 1570,
+      "quarantined": 196,
+      "applied": 78514,
+      "entities": 77193,
+      "facts": 740447,
+      "conflicts": 274,
+      "skewed_sources": 15
+    },
+    "quarantine_reasons": {
+      "unknown entity \u2026": 49,
+      "missing entity_id": 49,
+      "file\u2026size_mb should be a number, got 'very big'": 40,
+      "unknown field photo\u2026favourite_colour": 29,
+      "unknown field health_day\u2026favourite_colour": 10,
+      "account\u2026quota_gb should be a number, got 'lots'": 9,
+      "unknown field file\u2026favourite_colour": 5,
+      "unknown field event\u2026favourite_colour": 3,
+      "unknown field contact\u2026favourite_colour": 2
+    },
+    "conflicts_by_field": {
+      "contact.email": 151,
+      "contact.phone": 123
+    },
+    "skewed_sources": [
+      {
+        "user_id": "u_eb3039b99a50",
+        "source": "dev_f94b53164da6",
+        "clock_skew_s": 32400.0
+      },
+      {
+        "user_id": "u_319b18eb8b59",
+        "source": "dev_cef66eb3f250",
+        "clock_skew_s": 32400.0
+      },
+      {
+        "user_id": "u_27f8c4abb896",
+        "source": "dev_a9058f27857c",
+        "clock_skew_s": 32400.0
+      },
+      {
+        "user_id": "u_55caeafbbbbb",
+        "source": "dev_25c961080f3a",
+        "clock_skew_s": -25200.0
+      },
+      {
+        "user_id": "u_d0da69379590",
+        "source": "dev_83b3d868fc8a",
+        "clock_skew_s": -25200.0
+      },
+      {
+        "user_id": "u_1c671796a4c4",
+        "source": "dev_061e2d029d6b",
+        "clock_skew_s": -25200.0
+      },
+      {
+        "user_id": "u_1306e1f6846a",
+        "source": "dev_5950ba92e6f4",
+        "clock_skew_s": -25200.0
+      },
+      {
+        "user_id": "u_8c6abe00dfc6",
+        "source": "dev_b98b7770f194",
+        "clock_skew_s": -25200.0
+      },
+      {
+        "user_id": "u_b80a3f0fc276",
+        "source": "dev_2865ae27cc5b",
+        "clock_skew_s": -25200.0
+      },
+      {
+        "user_id": "u_5be7fdb3128c",
+        "source": "dev_287474d45afd",
+        "clock_skew_s": -25200.0
+      },
+      {
+        "user_id": "u_9eedbc222e05",
+        "source": "dev_35ebdcd8a361",
+        "clock_skew_s": -25200.0
+      },
+      {
+        "user_id": "u_6da6069f5cb9",
+        "source": "dev_9673de684b7f",
+        "clock_skew_s": -25200.0
+      },
+      {
+        "user_id": "u_cf5260d071a0",
+        "source": "dev_89e132a26589",
+        "clock_skew_s": 18000.0
+      },
+      {
+        "user_id": "u_54a353e97e13",
+        "source": "dev_e6101b0374ad",
+        "clock_skew_s": 18000.0
+      },
+      {
+        "user_id": "u_209ca09ba67e",
+        "source": "dev_10c0bbd32456",
+        "clock_skew_s": 18000.0
+      }
+    ],
+    "stale_devices": 0,
+    "facts_by_entity": {
+      "account": 400,
+      "contact": 24668,
+      "device": 1212,
+      "event": 24534,
+      "file": 94250,
+      "health_day": 36000,
+      "photo": 559383
+    }
+  }
+}
