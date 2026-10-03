@@ -115,7 +115,7 @@ The API:
 To try the layer with an LLM:
 
 ```bash
-pip install -e ".[llm]" && export ANTHROPIC_API_KEY=...
+pip install -e ".[llm]" && export ANTHROPIC_API_KEY=... NTK_LLM_MODEL=<model id>
 ntk eval --agent llm --max-users 10 --out reports/llm
 ```
 

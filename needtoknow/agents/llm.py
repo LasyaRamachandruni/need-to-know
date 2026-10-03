@@ -1,6 +1,6 @@
 """An LLM agent that works from a context bundle through tool calls.
 
-    pip install ".[llm]"; export ANTHROPIC_API_KEY=...
+    pip install ".[llm]"; export ANTHROPIC_API_KEY=... NTK_LLM_MODEL=<model id>
     ntk eval --agent llm --max-users 10 --out reports/llm
 
 The model sees only the bundle. Each value carries its trust assessment, and
@@ -70,7 +70,9 @@ class LLMAgent:
 
             client = anthropic.Anthropic()
         self.client = client
-        self.model = model or os.environ.get("NTK_LLM_MODEL", "claude-sonnet-5-5")
+        self.model = model or os.environ.get("NTK_LLM_MODEL")
+        if not self.model:
+            raise ValueError("set NTK_LLM_MODEL to the model to use")
         self.max_tokens = max_tokens
 
     def act(self, task: Task, bundle: ContextBundle) -> list[Action]:
