@@ -104,6 +104,7 @@ def generate(users: int = 60, seed: int = 0, injection_rate: float = 0.08, confl
 
     def emit(user: UserTruth, entity: str, eid: str, fields: dict, source: str, server_ts: datetime,
              op: str = "upsert", skew: timedelta = timedelta(0)) -> None:
+        server_ts = min(server_ts, NOW - timedelta(minutes=1))  # nothing arrives from the future
         events.append({
             "event_id": g.uid("ev"), "user_id": user.user_id, "entity": entity, "entity_id": eid, "op": op,
             "fields": fields, "source": source, "client_ts": _iso(server_ts + skew), "server_ts": _iso(server_ts),
@@ -212,7 +213,8 @@ def generate(users: int = 60, seed: int = 0, injection_rate: float = 0.08, confl
         for pid in rng.sample(photo_ids, max(1, len(photo_ids) // 25)):  # re-imported duplicates
             dup = g.uid("p")
             rec = dict(st["photo"][pid]) | {"duplicate_of": pid, "favorite": False}
-            emit(u, "photo", dup, rec, "web", datetime.fromisoformat(rec["taken_at"].replace("Z", "+00:00")) + timedelta(days=rng.uniform(3, 60)))
+            reimported = datetime.fromisoformat(rec["taken_at"].replace("Z", "+00:00")) + timedelta(days=rng.uniform(3, 60))
+            emit(u, "photo", dup, rec, "web", min(NOW - timedelta(hours=1), reimported))
             st["photo"][dup] = rec
 
         # files
@@ -253,7 +255,7 @@ def generate(users: int = 60, seed: int = 0, injection_rate: float = 0.08, confl
                    "start": _iso(start), "end": _iso(start + timedelta(minutes=rng.choice([30, 60, 90, 120]))),
                    "location": rng.choice([None, "Office", "Home", u.home_city, "Zoom"]), "attendees": att,
                    "note": rng.choice([None] * 6 + ["bring the documents", "door code 2291"])}
-            emit(u, "event", eid, rec, src(), max(START, start - timedelta(days=rng.uniform(1, 20))))
+            emit(u, "event", eid, rec, src(), max(START, min(NOW - timedelta(hours=1), start - timedelta(days=rng.uniform(1, 20)))))
             st["event"][eid] = rec
 
         # health (special category)
