@@ -87,6 +87,8 @@ class ContextBundle:
 
 
 def _parse(ts) -> datetime:
+    if isinstance(ts, (int, float)):
+        return datetime.fromtimestamp(ts, tz=timezone.utc)
     if isinstance(ts, datetime):
         return ts if ts.tzinfo else ts.replace(tzinfo=timezone.utc)
     return datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
@@ -106,14 +108,15 @@ class ContextService:
     # -- loading -------------------------------------------------------------
     def _load(self, user_id: str):
         rows = self.con.execute(
-            "select entity, entity_id, field, value, source, updated_at, conflict, candidates "
+            # timestamps come back as epoch seconds: no timezone library needed on the client
+            "select entity, entity_id, field, value, source, epoch(updated_at), conflict, candidates "
             "from facts where user_id = ?", [user_id]).fetchall()
         recs: dict[str, dict[str, dict]] = {}
         meta: dict[tuple, tuple] = {}
         for ent, eid, f, v, src, upd, conflict, cands in rows:
             recs.setdefault(ent, {}).setdefault(eid, {})[f] = json.loads(v)
             meta[(ent, eid, f)] = (src, _parse(upd), bool(conflict), json.loads(cands) if cands else None)
-        seen = dict(self.con.execute("select source, last_event_at from source_health where user_id = ?",
+        seen = dict(self.con.execute("select source, epoch(last_event_at) from source_health where user_id = ?",
                                      [user_id]).fetchall())
         return recs, meta, {k: _parse(v) for k, v in seen.items()}
 
